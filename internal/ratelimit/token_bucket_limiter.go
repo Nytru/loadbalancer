@@ -12,13 +12,13 @@ import (
 var _ Limiter = (*TokenBucketLimiter)(nil)
 
 type TokenBucketLimiter struct {
-	enabled         bool
-	redisRepo       *datebase.RedisRepo
-	clientMgr       *clients.ClientLimitManager
-	buckets         map[string]*Bucket
-	defaultCfg      limiterConfig
-	mu              sync.RWMutex
-	appCtx          context.Context
+	enabled    bool
+	redisRepo  *datebase.RedisRepo
+	clientMgr  *clients.ClientLimitManager
+	buckets    map[string]*Bucket
+	defaultCfg limiterConfig
+	mu         sync.RWMutex
+	appCtx     context.Context
 }
 
 type limiterConfig struct {
@@ -46,9 +46,9 @@ func NewLimiterManager(
 	}
 
 	lm := &TokenBucketLimiter{
-		redisRepo:       redisRepo,
-		clientMgr:       clientMgr,
-		buckets:         make(map[string]*Bucket),
+		redisRepo: redisRepo,
+		clientMgr: clientMgr,
+		buckets:   make(map[string]*Bucket),
 		defaultCfg: limiterConfig{
 			maxCapacity:    defaultCfg.Capacity,
 			refillInterval: defaultCfg.RefillInterval,

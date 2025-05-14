@@ -7,7 +7,9 @@ import (
 	"testing"
 )
 
-const (id = "192.168.97.11")
+const (
+	id = "192.168.97.11"
+)
 
 func TestMain(m *testing.M) {
 	code := m.Run()
@@ -21,7 +23,7 @@ func TestAddCustomRule(t *testing.T) {
     "capacity" : 20,
     "refill_interval_ms": 500
 	}`
-	
+
 	body := strings.NewReader(bodyString)
 
 	response, err := http.Post("http://localhost:80/clients", "application/json", body)

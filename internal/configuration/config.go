@@ -39,9 +39,9 @@ type HealthCfg struct {
 }
 
 type RateCfg struct {
-	Capacity        int           `yaml:"capacity"`
-	RefillInterval  time.Duration `yaml:"refill_interval"`
-	Enabled         bool          `yaml:"enabled"`
+	Capacity       int           `yaml:"capacity"`
+	RefillInterval time.Duration `yaml:"refill_interval"`
+	Enabled        bool          `yaml:"enabled"`
 }
 
 type Backend struct {

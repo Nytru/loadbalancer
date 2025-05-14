@@ -31,8 +31,8 @@ func (r *Repo) Get(ctx context.Context, id string) (ClientLimitDb, error) {
 
 	var cl ClientLimitDb
 	err = c.
-	QueryRow(ctx, "SELECT id, capacity, refill_interval_milliseconds FROM client_limits WHERE id = $1", id).
-	Scan(&cl.ID, &cl.Capacity, &cl.RefillIntervalMs)
+		QueryRow(ctx, "SELECT id, capacity, refill_interval_milliseconds FROM client_limits WHERE id = $1", id).
+		Scan(&cl.ID, &cl.Capacity, &cl.RefillIntervalMs)
 
 	if err != nil {
 		if err == pgx.ErrNoRows {
