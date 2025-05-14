@@ -1,0 +1,48 @@
+services:
+  loadbalancer:
+    build: .
+    command: [ "./loadbalancer", "--configuration", "/configurations/prod.yaml" ]
+    ports:
+      - "8080:8080"
+      - "80:80"
+    volumes:
+      - ./configurations/prod.yaml:/configurations/prod.yaml
+      - ./migrations:/app/migrations
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres:17
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--requirepass", "redis", "--appendonly", "yes", "--appendfsync", "always"]
+    environment:
+      REDIS_PASSWORD: redis
+
+  backend1:
+    image: hashicorp/http-echo:latest
+    command: ["-text=backend1"]
+    ports:
+      - "8081:5678"
+
+  backend2:
+    image: hashicorp/http-echo:latest
+    command: ["-text=backend2"]
+    ports:
+      - "8082:5678"
+
+  backend3:
+    image: hashicorp/http-echo:latest
+    command: ["-text=backend3"]
+    ports:
+      - "8083:5678"

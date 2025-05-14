@@ -1,0 +1,36 @@
+proxy_listen: "0.0.0.0:8080"
+admin_listen: "0.0.0.0:80"
+
+loadbalancer:
+  backends:
+    - name: backend1
+      url: http://localhost:8081
+    - name: backend2
+      url: http://localhost:8082
+    - name: backend3
+      url: http://localhost:8083
+  health_check:
+    timeout: 3s
+    interval: 10s
+    health_url: /health
+
+rate_limit:
+  capacity: 10
+  refill_interval: 10s
+  enabled: true
+
+postgres_database:
+  host: localhost
+  port: 5432
+  user: postgres
+  password: postgres
+  dbname: postgres
+
+  migrations_path: ../../migrations
+
+log_path: # ../logs.log
+
+redis_database:
+  addr: localhost:6379
+  password: redis
+  db: 0
