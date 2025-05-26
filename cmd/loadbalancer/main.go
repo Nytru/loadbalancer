@@ -55,7 +55,6 @@ func getPathToConfigurationFileFromFlag() (string, error) {
 		return "", fmt.Errorf("configuration file path is not provided")
 	}
 
-	// check that file exists
 	_, err := os.Stat(*configurationPath)
 	if err != nil {
 		return "", fmt.Errorf("configuration file does not exist")
