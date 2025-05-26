@@ -9,7 +9,6 @@ func TestRateLimiter(t *testing.T) {
 	client := &http.Client{}
 	url := "http://localhost:8080"
 
-	// Simulate 10 successful requests
 	for i := 0; i < 100; i++ {
 		resp, err := client.Get(url)
 		if err != nil {
@@ -18,7 +17,6 @@ func TestRateLimiter(t *testing.T) {
 		resp.Body.Close()
 	}
 
-	// The 11th request should return 429
 	resp, err := client.Get(url)
 	if err != nil {
 		t.Fatalf("Failed to send GET request: %v", err)
